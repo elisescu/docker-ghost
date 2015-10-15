@@ -10,7 +10,7 @@ FROM ubuntu:12.04
 RUN \
   apt-get update && \
   apt-get install -y python python-dev python-pip python-virtualenv wget \
-  make autoconf autotools-dev clang++-3.4 build-essential&& \
+  make autoconf autotools-dev clang++-3.4 build-essential unzip && \
   rm -rf /var/lib/apt/lists/*
 
 # Install Node.js
@@ -32,7 +32,7 @@ RUN \
 # Install Ghost
 RUN \
   cd /tmp && \
-  wget https://ghost.org/zip/ghost-latest.zip && \
+  wget --no-check-certificate https://ghost.org/zip/ghost-latest.zip && \
   unzip ghost-latest.zip -d /ghost && \
   rm -f ghost-latest.zip && \
   cd /ghost && \
