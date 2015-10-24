@@ -1,20 +1,25 @@
-#
-# Ghost Dockerfile
-#
-# https://github.com/dockerfile/ghost
-#
-
 # Pull base image.
-FROM elisescu/docker-nodejs
+FROM ubuntu:12.04
 
 RUN \
   apt-get update && \
-  apt-get install -y unzip
+  apt-get install -y unzip ca-certificates wget
+
+# Install nvm
+RUN \
+  cd /tmp/ && \
+  wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash && \
+  mv ~/.nvm /nvm && \
+  chmod -R 777 /nvm
+
+ENV NODE_VERSION 0.10
+ENV NVM_DIR /nvm
 
 # Install Ghost
 RUN \
   cd /tmp && \
-  wget --no-check-certificate https://ghost.org/zip/ghost-latest.zip && \
+  . /nvm/nvm.sh && nvm install $NODE_VERSION && nvm use 0.10 && \
+  wget https://ghost.org/zip/ghost-latest.zip && \
   unzip ghost-latest.zip -d /ghost && \
   rm -f ghost-latest.zip && \
   cd /ghost && \

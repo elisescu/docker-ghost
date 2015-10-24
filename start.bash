@@ -39,5 +39,7 @@ fi
 chown -R ghost:ghost /data /ghost /ghost-override
 su ghost << EOF
 cd "$GHOST"
+. /nvm/nvm.sh
+nvm use 0.10
 NODE_ENV=${NODE_ENV:-production} npm start
 EOF
