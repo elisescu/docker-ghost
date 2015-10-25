@@ -41,5 +41,6 @@ su ghost << EOF
 cd "$GHOST"
 . /nvm/nvm.sh
 nvm use 0.10
+sed -i 's/my-ghost-blog.com/$BLOG_ADDRESS/' config.js
 NODE_ENV=${NODE_ENV:-production} npm start
 EOF
