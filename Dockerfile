@@ -41,6 +41,3 @@ WORKDIR /ghost
 
 # Define default command.
 CMD ["bash", "/ghost-start"]
-
-# Expose ports.
-EXPOSE 2368
