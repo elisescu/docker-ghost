@@ -18,14 +18,15 @@ ENV NVM_DIR /nvm
 # Install Ghost
 RUN \
   cd /tmp && \
-  . /nvm/nvm.sh && nvm install $NODE_VERSION && nvm use 0.10 && \
+  . /nvm/nvm.sh && nvm install $NODE_VERSION && nvm use $NODE_VERSION && \
   wget https://ghost.org/zip/ghost-latest.zip && \
   unzip ghost-latest.zip -d /ghost && \
   rm -f ghost-latest.zip && \
   cd /ghost && \
   npm install --production && \
   sed 's/127.0.0.1/0.0.0.0/' /ghost/config.example.js > /ghost/config.js && \
-  useradd ghost --home /ghost
+  useradd ghost --home /ghost && \
+  echo $NODE_VERSION >> /etc/bashrc
 
 # Add files.
 ADD start.bash /ghost-start
